@@ -35,14 +35,18 @@ public:
 
     void setSquare() {square = true;}
     void setColor(QColor *c) {color = c;}
+    void setTextColor(QColor *c) {colorFont = c;}
     void setX(int x) {this->x = x;}
     void setXAdd(int xAdd) {this->xAdd = xAdd;}
 
     void setParent(knotpos *k);
+    void setNil(){nil = true;}
 
     bool getSquare() {return square;}
     QColor *getColor() {return color;}
+    QColor *getTextColor() {return colorFont;}
     int getXAdd(){return xAdd;}
+    bool getNil(){return nil;}
 
     /**
      * ------------------------------------
@@ -53,18 +57,21 @@ private:
     int x;                                  //x-Position des Knotens
     int y;                                  //y-Position des Knotens
     int size;                               //Größe des Knotens
-    int value;                              //Textwert des Knotens
+    int value = 0;                              //Textwert des Knotens
     int *values = nullptr;
     int valueN = -1;
     int xAdd = 0;
 
     QColor *color = nullptr;                //Optionale Knotenfarbe
+    QColor *colorFont = nullptr;
     bool square = false;                    //Optionale Knotenform
 
     knotpos *leftK = nullptr;                         //Linker Knoten
     knotpos *rightK = nullptr;                        //Rechter Knoten
 
     knotpos *parent;
+
+    bool nil = false;
 };
 
 #endif

@@ -78,7 +78,9 @@ void RenderArea::addKnot(knotpos *knot){
     f.setPointSize(18.0 / d);
 
     QString string;
-    if(knot->getValueN() != -1){
+    if(knot->getNil()){
+        string = "NIL";
+    } else if(knot->getValueN() != -1){
         string = QString::number(knot ->getValues()[0]);
         for(int i = 1; i < knot->getValueN(); i++){
             string = string + ", " + QString::number(knot ->getValues()[i]);
@@ -91,6 +93,9 @@ void RenderArea::addKnot(knotpos *knot){
     text->setPos(knot->getSize() + knot->getXAdd() / 2 - QFontMetrics(f).size(Qt::TextSingleLine, string).width() / 2 + knot->getX() - 4,
                  knot->getSize() - QFontMetrics(f).size(Qt::TextSingleLine, string).height() / 2 + knot->getY() - 4);
     text->setZValue(zFont);
+    if(knot->getTextColor() != nullptr){
+        text->setDefaultTextColor(knot->getTextColor()->rgb());
+    }
 
     if(knot->getParent() != nullptr){
         drawLine(knot, knot->getParent());

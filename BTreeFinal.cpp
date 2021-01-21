@@ -2,8 +2,8 @@
 #include<ctime>
 #include<cmath>
 #include<iomanip>
-#include "BTreeFinal.h"
-#include "ShowKnot.h"
+#include"BTreeFinal.h"
+#include"showknot.h"
 
 /*******************************************************************************
                             TO DO

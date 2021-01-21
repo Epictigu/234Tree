@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "renderarea.h"
 #include "BTreeFinal.h"
+#include "rbtree.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ShowKnot; }
@@ -21,17 +22,19 @@ class ShowKnot : public QMainWindow
 public:
     ShowKnot(struct TreeNode* tree);
     ShowKnot(BTreeNode *tree);
+    ShowKnot(struct RBTreeNode *tree, RBTreeNode *nil);
     RenderArea* getRenderArea();
 
     static ShowKnot* display(struct TreeNode* tree);
     static ShowKnot* display(BTreeNode *tree);
+    static ShowKnot* display(struct RBTreeNode *tree, RBTreeNode *nil);
 
 private:
     void penChanged();
     void brushChanged();
 
     static const int deltaX = 100;              //deltaX zur Weitergabe an Graphics und Berechnung
-    static const int deltaY = 150;              //deltaY zur Weitergabe an Graphics und Berechnung
+    static const int deltaY = 200;              //deltaY zur Weitergabe an Graphics und Berechnung
 
     RenderArea *scene;                          //Grafische Darstellung des Baumes
 

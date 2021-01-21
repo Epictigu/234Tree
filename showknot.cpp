@@ -85,6 +85,39 @@ ShowKnot::ShowKnot(BTreeNode *tree)
     move(x, y);
 }
 
+ShowKnot::ShowKnot(struct RBTreeNode *tree, RBTreeNode *nil)
+{
+    scene = new RenderArea(deltaX, deltaY, this);
+
+    penChanged();
+    brushChanged();
+
+    knotpos *test0 = nullptr;
+    test0 = calculateposition::positionen_eintragen(tree, deltaX, deltaY, scene, nil);
+    test0->setSquare();
+    scene->addKnot(test0);
+
+    setWindowTitle(tr("QTTree"));
+
+    setCentralWidget(scene->view);
+
+    QRectF qrf = scene->sceneRect();
+    QSize rec = qApp->screens()[0]->size();
+
+    int barHeight = QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight);
+    int frameWidth = QApplication::style()->pixelMetric(QStyle::PM_DefaultFrameWidth) * 2;
+    int scrollBar = QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+
+    int width = qrf.width() + frameWidth + scrollBar; if(width > rec.width()) width = rec.width();
+    int height = qrf.height() + frameWidth + scrollBar; if(height > rec.height() - barHeight)  height = rec.height() - barHeight;
+    resize(width, height);
+    setMinimumSize(width / 4, height / 4);
+
+    int x = rec.width() - width; if(x != 0) x /= 2; if(x < 0) x = 0;
+    int y = rec.height() - (height + barHeight); if(y != 0) y /= 2; if(y < 0) y = 0;
+    move(x, y);
+}
+
 
 /**
  * @brief Methode zur Rückgabe des Zeichenobjektes.
@@ -131,6 +164,12 @@ ShowKnot* ShowKnot::display(struct TreeNode* tree){
 
 ShowKnot* ShowKnot::display(BTreeNode *tree){
     ShowKnot* s = new ShowKnot(tree);
+    s->show();
+    return s;
+};
+
+ShowKnot* ShowKnot::display(RBTreeNode *tree, RBTreeNode *nil){
+    ShowKnot* s = new ShowKnot(tree, nil);
     s->show();
     return s;
 };

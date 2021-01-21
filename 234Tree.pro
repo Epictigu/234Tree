@@ -21,6 +21,7 @@ HEADERS += \
     BTreeFinal.h \
     calculateposition.h \
     knotpos.h \
+    rbtree.h \
     renderarea.h \
     showknot.h \
     tree.h
